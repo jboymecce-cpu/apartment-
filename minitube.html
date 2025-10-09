@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiniTube HTML</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f0f0f0; }
+  header { background:#333; color:#fff; padding:12px; text-align:center; }
+  .container { max-width:800px; margin:20px auto; padding:10px; background:#fff; border-radius:8px; }
+  .video-card { border:1px solid #ccc; padding:8px; margin-bottom:12px; border-radius:6px; }
+  video { width:100%; max-height:400px; }
+  .comments { margin-top:10px; }
+  textarea { width:100%; margin-top:6px; }
+  button { margin-top:6px; padding:6px 12px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>MiniTube HTML</h1>
+</header>
+
+<div class="container">
+  <h2>Upload Video</h2>
+  <input type="file" id="videoInput" accept="video/*"><br>
+  <input type="text" id="videoTitle" placeholder="Video title"><br>
+  <button onclick="uploadVideo()">Upload</button>
+</div>
+
+<div class="container">
+  <h2>Video Feed</h2>
+  <div id="videoFeed"></div>
+</div>
+
+<script>
+let videos = JSON.parse(localStorage.getItem('videos') || '[]');
+
+function saveVideos() {
+  localStorage.setItem('videos', JSON.stringify(videos));
+}
+
+function uploadVideo() {
+  const input = document.getElementById('videoInput');
+  const title = document.getElementById('videoTitle').value || 'Untitled';
+  if(input.files.length === 0) return alert('Select a video!');
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const videoData = {
+      id: Date.now(),
+      title,
+      src: e.target.result,
+      likes: 0,
+      comments: []
+    };
+    videos.unshift(videoData);
+    saveVideos();
+    renderFeed();
+    input.value = '';
+    document.getElementById('videoTitle').value = '';
+  }
+  reader.readAsDataURL(file);
+}
+
+function addComment(id) {
+  const text = document.getElementById('commentInput_'+id).value;
+  if(!text) return;
+  const video = videos.find(v => v.id === id);
+  video.comments.push(text);
+  saveVideos();
+  renderFeed();
+}
+
+function likeVideo(id) {
+  const video = videos.find(v => v.id === id);
+  video.likes++;
+  saveVideos();
+  renderFeed();
+}
+
+function renderFeed() {
+  const feed = document.getElementById('videoFeed');
+  feed.innerHTML = '';
+  videos.forEach(video => {
+    const div = document.createElement('div');
+    div.className = 'video-card';
+    div.innerHTML = `
+      <h3>${video.title}</h3>
+      <video controls src="${video.src}"></video>
+      <p>Likes: ${video.likes} <button onclick="likeVideo(${video.id})">Like</button></p>
+      <div class="comments">
+        <h4>Comments</h4>
+        ${video.comments.map(c => `<p>${c}</p>`).join('')}
+        <textarea id="commentInput_${video.id}" placeholder="Add a comment"></textarea><br>
+        <button onclick="addComment(${video.id})">Comment</button>
+      </div>
+    `;
+    feed.appendChild(div);
+  });
+}
+
+renderFeed();
+</script>
+
+</body>
+</html>
