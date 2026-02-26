@@ -1,107 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MiniTube HTML</title>
-<style>
-  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f0f0f0; }
-  header { background:#333; color:#fff; padding:12px; text-align:center; }
-  .container { max-width:800px; margin:20px auto; padding:10px; background:#fff; border-radius:8px; }
-  .video-card { border:1px solid #ccc; padding:8px; margin-bottom:12px; border-radius:6px; }
-  video { width:100%; max-height:400px; }
-  .comments { margin-top:10px; }
-  textarea { width:100%; margin-top:6px; }
-  button { margin-top:6px; padding:6px 12px; cursor:pointer; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakeview Haven Apartments • 20 West French Ave, Burnside, KY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .heading-font { font-family: 'Playfair Display', serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)), url('https://picsum.photos/id/1015/2000/1200');
+            background-size: cover;
+            background-position: center 35%;
+        }
+        .nav-link { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-link:hover { color: #10b981; transform: translateY(-2px); }
+        .unit-card { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .unit-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 30px 60px -15px rgb(16 185 129 / 0.3); }
+        .gallery-img { transition: all 0.5s ease; }
+        .gallery-img:hover { transform: scale(1.08); filter: brightness(1.05); }
+        .feature-card:hover .icon { transform: rotate(12deg) scale(1.15); }
+    </style>
 </head>
-<body>
+<body class="bg-zinc-50 text-zinc-800">
 
-<header>
-  <h1>MiniTube HTML</h1>
-</header>
+    <!-- NAVBAR -->
+    <nav class="bg-white/95 backdrop-blur-xl shadow-xl fixed w-full z-50 border-b border-emerald-100">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-11 h-11 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-3xl flex items-center justify-center text-white text-4xl shadow-inner">🏠</div>
+                <div>
+                    <span class="heading-font text-4xl font-bold tracking-tight text-emerald-800">Lakeview Haven</span>
+                    <p class="text-xs text-teal-600 font-medium -mt-1">Burnside, Kentucky • Lake Cumberland</p>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-10 text-base font-medium">
+                <a href="#units" class="nav-link">Units &amp; Pricing</a>
+                <a href="#location" class="nav-link">Location</a>
+                <a href="#amenities" class="nav-link">Amenities</a>
+                <a href="#financials" class="nav-link">Investment</a>
+                <a href="#contact" class="nav-link">Pre-Lease</a>
+            </div>
+            <button onclick="toggleChat()" 
+                    class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 rounded-3xl font-semibold flex items-center gap-3 shadow-lg transition-all active:scale-95">
+                <i class="fa-solid fa-robot text-xl"></i>
+                <span class="hidden sm:inline">Talk to Leasing AI</span>
+            </button>
+        </div>
+    </nav>
 
-<div class="container">
-  <h2>Upload Video</h2>
-  <input type="file" id="videoInput" accept="video/*"><br>
-  <input type="text" id="videoTitle" placeholder="Video title"><br>
-  <button onclick="uploadVideo()">Upload</button>
-</div>
+    <!-- HERO -->
+    <section class="hero-bg h-screen flex items-center text-white relative">
+        <div class="max-w-7xl mx-auto px-6 pt-20">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-4 bg-white/20 backdrop-blur-3xl px-8 py-4 rounded-3xl text-sm font-medium mb-8 border border-white/30">
+                    <span class="bg-emerald-400 w-3 h-3 rounded-full animate-ping"></span>
+                    PRE-LEASING 2026 • 20 WEST FRENCH AVE
+                </div>
+                <h1 class="heading-font text-7xl md:text-8xl font-bold leading-none tracking-tighter">Modern Lakeside<br>Living in Burnside</h1>
+                <p class="mt-8 text-3xl font-light max-w-2xl">Brand-new 6-unit apartment community with private decks, minutes from Cole Community Park, Burnside Marina &amp; Lake Cumberland.</p>
+                <div class="mt-12 flex gap-5 flex-wrap">
+                    <a href="#units" class="bg-white text-emerald-900 hover:bg-emerald-100 px-12 py-6 rounded-3xl text-2xl font-semibold transition-all">See Floor Plans &amp; Pricing</a>
+                    <a href="#contact" class="border-2 border-white/80 hover:bg-white/10 px-12 py-6 rounded-3xl text-2xl font-semibold transition-all">Pre-Lease Today</a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/70 text-sm flex flex-col items-center">
+            <div class="animate-bounce text-3xl">↓</div>
+            Scroll to explore
+        </div>
+    </section>
 
-<div class="container">
-  <h2>Video Feed</h2>
-  <div id="videoFeed"></div>
-</div>
+    <!-- UNITS -->
+    <section id="units" class="max-w-7xl mx-auto px-6 py-24">
+        <h2 class="heading-font text-6xl font-bold text-center mb-4">Your New Home Awaits</h2>
+        <p class="text-center text-xl text-zinc-600 max-w-xl mx-auto mb-16">4 spacious 3-bedroom units + 2 cozy 1-bedroom units — each with its own private deck</p>
+        
+        <div class="grid lg:grid-cols-2 gap-12">
+            <!-- 3BR -->
+            <div class="unit-card bg-white border border-zinc-100 rounded-3xl overflow-hidden">
+                <div class="h-80 bg-[url('https://picsum.photos/id/1060/800/600')] bg-cover"></div>
+                <div class="p-10">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-5 py-2 rounded-3xl">3 BED • 2 BATH</span>
+                            <div class="text-6xl font-bold text-emerald-800 mt-6">$1,250<span class="text-2xl font-normal text-zinc-500">/mo</span></div>
+                        </div>
+                        <div class="text-right text-sm leading-tight">
+                            1,200–1,500 sq ft<br>
+                            Private deck (100–150 sq ft)
+                        </div>
+                    </div>
+                    <ul class="mt-10 space-y-5 text-lg">
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Open-concept kitchen &amp; living area</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Stainless steel appliances</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> In-unit washer &amp; dryer</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Energy-efficient HVAC</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Luxury vinyl plank flooring</li>
+                    </ul>
+                    <div class="mt-12 text-emerald-700 font-medium">4 units available • Perfect for families</div>
+                </div>
+            </div>
 
-<script>
-let videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            <!-- 1BR -->
+            <div class="unit-card bg-white border border-zinc-100 rounded-3xl overflow-hidden">
+                <div class="h-80 bg-[url('https://picsum.photos/id/1040/800/600')] bg-cover"></div>
+                <div class="p-10">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="bg-teal-100 text-teal-700 text-xs font-bold px-5 py-2 rounded-3xl">1 BED • 1 BATH</span>
+                            <div class="text-6xl font-bold text-emerald-800 mt-6">$850<span class="text-2xl font-normal text-zinc-500">/mo</span></div>
+                        </div>
+                        <div class="text-right text-sm leading-tight">
+                            600–800 sq ft<br>
+                            Private deck (80–100 sq ft)
+                        </div>
+                    </div>
+                    <ul class="mt-10 space-y-5 text-lg">
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Bright open living space</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Modern full kitchen</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> In-unit laundry</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Energy-efficient windows &amp; HVAC</li>
+                        <li class="flex gap-4"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> Luxury vinyl plank flooring</li>
+                    </ul>
+                    <div class="mt-12 text-teal-700 font-medium">2 units available • Ideal for couples or singles</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function saveVideos() {
-  localStorage.setItem('videos', JSON.stringify(videos));
-}
+    <!-- LOCATION -->
+    <section id="location" class="bg-gradient-to-br from-emerald-900 to-teal-900 text-white py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div>
+                    <span class="uppercase tracking-[4px] text-teal-400 text-sm">Just steps from everything</span>
+                    <h2 class="heading-font text-6xl font-bold mt-3">Prime Burnside Location</h2>
+                    <div class="mt-12 space-y-10">
+                        <div class="flex gap-8">
+                            <div class="text-5xl flex-shrink-0">🌳</div>
+                            <div>
+                                <div class="text-2xl font-semibold">Cole Community Park</div>
+                                <div class="text-teal-200">0.1 miles — tennis, basketball, playground, picnics</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-8">
+                            <div class="text-5xl flex-shrink-0">⛵</div>
+                            <div>
+                                <div class="text-2xl font-semibold">Burnside Marina &amp; Lake Cumberland</div>
+                                <div class="text-teal-200">~0.5 miles — boat ramps, fishing, shoreline</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-8">
+                            <div class="text-5xl flex-shrink-0">🏞️</div>
+                            <div>
+                                <div class="text-2xl font-semibold">General Burnside Island State Park</div>
+                                <div class="text-teal-200">1.5 miles — golf, hiking, lake access</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-8">
+                            <div class="text-5xl flex-shrink-0">🏫</div>
+                            <div>
+                                <div class="text-2xl font-semibold">Burnside Elementary (brand new)</div>
+                                <div class="text-teal-200">~2 miles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded-3xl overflow-hidden shadow-2xl">
+                    <iframe width="100%" height="520" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.5!2d-84.6128!3d36.9923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8859f3e8f8f8f8f8%3A0x0!2s20%20W%20French%20Ave%2C%20Burnside%2C%20KY%2042519!5e0!3m2!1sen!2sus!4v1730000000000" 
+                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function uploadVideo() {
-  const input = document.getElementById('videoInput');
-  const title = document.getElementById('videoTitle').value || 'Untitled';
-  if(input.files.length === 0) return alert('Select a video!');
-  const file = input.files[0];
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const videoData = {
-      id: Date.now(),
-      title,
-      src: e.target.result,
-      likes: 0,
-      comments: []
-    };
-    videos.unshift(videoData);
-    saveVideos();
-    renderFeed();
-    input.value = '';
-    document.getElementById('videoTitle').value = '';
-  }
-  reader.readAsDataURL(file);
-}
+    <!-- AMENITIES (no wifi) -->
+    <section id="amenities" class="py-24 max-w-7xl mx-auto px-6">
+        <h2 class="heading-font text-6xl font-bold text-center mb-20">Thoughtfully Designed for Comfort</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="feature-card bg-white rounded-3xl p-10 border border-zinc-100">
+                <div class="icon text-7xl mb-8">🪑</div>
+                <h3 class="text-3xl font-semibold">Private Deck on Every Unit</h3>
+                <p class="text-zinc-600 mt-4 leading-relaxed">Your own outdoor space — perfect for morning coffee or evening lake breezes.</p>
+            </div>
+            <div class="feature-card bg-white rounded-3xl p-10 border border-zinc-100">
+                <div class="icon text-7xl mb-8">🍳</div>
+                <h3 class="text-3xl font-semibold">Modern Kitchens</h3>
+                <p class="text-zinc-600 mt-4 leading-relaxed">Stainless steel appliances, quartz counters, and open-concept layout.</p>
+            </div>
+            <div class="feature-card bg-white rounded-3xl p-10 border border-zinc-100">
+                <div class="icon text-7xl mb-8">🧺</div>
+                <h3 class="text-3xl font-semibold">In-Unit Laundry</h3>
+                <p class="text-zinc-600 mt-4 leading-relaxed">Full-size washer &amp; dryer — no more laundromat trips.</p>
+            </div>
+            <div class="feature-card bg-white rounded-3xl p-10 border border-zinc-100">
+                <div class="icon text-7xl mb-8">🌬️</div>
+                <h3 class="text-3xl font-semibold">Energy-Efficient HVAC</h3>
+                <p class="text-zinc-600 mt-4 leading-relaxed">Quiet, efficient heating &amp; cooling for year-round comfort.</p>
+            </div>
+            <div class="feature-card bg-white rounded-3xl p-10 border border-zinc-100">
+                <div class="icon text-7xl mb-8">🚗</div>
+                <h3 class="text-3xl font-semibold">Ample Parking</h3>
+                <p class="text-zinc-600 mt-4 leading-relaxed">8–10 dedicated spaces plus guest parking.</p>
+            </div>
+            <div class="feature-card bg-white rounded-3xl p-10 border border-zinc-100">
+                <div class="icon text-7xl mb-8">🌿</div>
+                <h3 class="text-3xl font-semibold">Quiet Community</h3>
+                <p class="text-zinc-600 mt-4 leading-relaxed">Small green space, peaceful setting near the lake.</p>
+            </div>
+        </div>
+    </section>
 
-function addComment(id) {
-  const text = document.getElementById('commentInput_'+id).value;
-  if(!text) return;
-  const video = videos.find(v => v.id === id);
-  video.comments.push(text);
-  saveVideos();
-  renderFeed();
-}
+    <!-- NEIGHBORHOOD PHOTOS -->
+    <section class="bg-zinc-100 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="heading-font text-5xl font-bold text-center mb-12">Your Neighborhood</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <img src="https://picsum.photos/id/1016/600/400" alt="Cole Community Park" class="gallery-img rounded-3xl shadow-xl">
+                <img src="https://picsum.photos/id/133/600/400" alt="Burnside Marina" class="gallery-img rounded-3xl shadow-xl">
+                <img src="https://picsum.photos/id/201/600/400" alt="Lake Cumberland" class="gallery-img rounded-3xl shadow-xl">
+                <img src="https://picsum.photos/id/251/600/400" alt="General Burnside Island State Park" class="gallery-img rounded-3xl shadow-xl">
+            </div>
+        </div>
+    </section>
 
-function likeVideo(id) {
-  const video = videos.find(v => v.id === id);
-  video.likes++;
-  saveVideos();
-  renderFeed();
-}
+    <!-- FINANCIAL -->
+    <section id="financials" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-6xl font-bold mb-8">Excellent Investment in a Growing Lake Community</h2>
+            <div class="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-12 rounded-3xl">
+                    <div class="text-7xl font-bold text-emerald-700">$6,700</div>
+                    <div class="mt-3 uppercase text-sm tracking-widest">Monthly Rental Income</div>
+                    <div class="mt-8 text-left text-xl space-y-2">
+                        <div>4 × 3BR = <span class="font-bold">$5,000</span></div>
+                        <div>2 × 1BR = <span class="font-bold">$1,700</span></div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-12 rounded-3xl">
+                    <div class="text-7xl font-bold text-emerald-700">$80,400</div>
+                    <div class="mt-3 uppercase text-sm tracking-widest">Annual (Long-Term)</div>
+                    <div class="text-emerald-600 mt-10 text-lg">Short-term vacation rental potential adds $30k–$45k/year</div>
+                </div>
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-12 rounded-3xl">
+                    <div class="text-7xl font-bold text-emerald-700">Strong ROI</div>
+                    <div class="mt-6 text-lg">Low construction cost + high demand near Lake Cumberland = excellent returns</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function renderFeed() {
-  const feed = document.getElementById('videoFeed');
-  feed.innerHTML = '';
-  videos.forEach(video => {
-    const div = document.createElement('div');
-    div.className = 'video-card';
-    div.innerHTML = `
-      <h3>${video.title}</h3>
-      <video controls src="${video.src}"></video>
-      <p>Likes: ${video.likes} <button onclick="likeVideo(${video.id})">Like</button></p>
-      <div class="comments">
-        <h4>Comments</h4>
-        ${video.comments.map(c => `<p>${c}</p>`).join('')}
-        <textarea id="commentInput_${video.id}" placeholder="Add a comment"></textarea><br>
-        <button onclick="addComment(${video.id})">Comment</button>
-      </div>
-    `;
-    feed.appendChild(div);
-  });
-}
+    <!-- CALL TO ACTION -->
+    <section id="contact" class="py-28 bg-gradient-to-br from-emerald-700 via-teal-700 to-cyan-700 text-white text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="heading-font text-6xl font-bold">Pre-Leasing Now for 2026 Move-In</h2>
+            <p class="text-2xl mt-8">Secure your unit before they’re gone. Contact us for floor plans, availability, or investor information.</p>
+            <button onclick="alert('Thank you! Leasing team will contact you within 24 hours. (Demo)')" 
+                    class="mt-14 bg-white text-emerald-800 hover:bg-amber-100 px-16 py-8 rounded-3xl text-3xl font-semibold shadow-2xl transition-all">
+                Get In Touch Today
+            </button>
+        </div>
+    </section>
 
-renderFeed();
-</script>
+    <!-- FOOTER -->
+    <footer class="bg-zinc-900 text-zinc-400 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-4">
+                    <span class="text-5xl">🏠</span>
+                    <span class="heading-font text-4xl text-white">Lakeview Haven</span>
+                </div>
+                <div class="text-center md:text-right text-sm">
+                    20 West French Ave<br>
+                    Burnside, KY 42519<br>
+                    <span class="text-teal-400">Near Lake Cumberland • Coming 2026</span>
+                </div>
+            </div>
+            <div class="text-center text-xs text-zinc-500 mt-16">© 2026 Lakeview Haven Apartments • All rights reserved</div>
+        </div>
+    </footer>
 
+    <!-- CHATBOT -->
+    <div onclick="toggleChat()" class="fixed bottom-8 right-8 bg-gradient-to-br from-emerald-600 to-teal-600 w-16 h-16 rounded-3xl flex items-center justify-center text-white shadow-2xl cursor-pointer hover:scale-110 transition-all z-50">
+        <i class="fa-solid fa-comments text-3xl"></i>
+    </div>
+
+    <div id="chat-window" class="hidden fixed bottom-24 right-8 w-96 bg-white rounded-3xl shadow-2xl overflow-hidden z-[100]">
+        <div class="bg-gradient-to-r from-emerald-700 to-teal-700 text-white px-6 py-5 flex items-center gap-4">
+            <div class="w-11 h-11 bg-white/20 rounded-2xl flex items-center justify-center text-3xl">🏠</div>
+            <div class="font-semibold text-lg">Lakeview Haven Leasing AI</div>
+            <button onclick="toggleChat()" class="ml-auto text-4xl leading-none">×</button>
+        </div>
+        <div id="chat-messages" class="h-96 p-6 overflow-y-auto bg-zinc-50"></div>
+        <div class="p-4 border-t flex">
+            <input id="chat-input" type="text" placeholder="3BR availability? Distance to park?" 
+                   class="flex-1 bg-zinc-100 rounded-3xl px-6 py-4 outline-none text-sm"
+                   onkeypress="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()" class="ml-3 bg-emerald-700 hover:bg-emerald-800 w-12 h-12 rounded-3xl text-white flex items-center justify-center">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const win = document.getElementById('chat-window');
+            win.classList.toggle('hidden');
+            if (!win.classList.contains('hidden') && document.getElementById('chat-messages').children.length === 0) {
+                addMessage('bot', "Hi there! 👋 I'm the Lakeview Haven AI assistant. Ask me anything about the apartments, pricing, location to Cole Park or Burnside Marina, amenities, or pre-leasing for 2026!");
+            }
+        }
+
+        function addMessage(sender, text) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+            div.innerHTML = `<div class="${sender === 'user' ? 'bg-emerald-700 text-white' : 'bg-white border'} px-6 py-4 rounded-3xl max-w-[85%] text-sm">${text}</div>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const q = input.value.trim();
+            if (!q) return;
+            addMessage('user', q);
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = "Thanks for your question! The leasing team will reply with full details soon.";
+                const lower = q.toLowerCase();
+                if (lower.includes('3br') || lower.includes('three bedroom')) reply = "We have four beautiful 3-bedroom / 2-bath units at $1,250/month — each with private deck, stainless appliances, and in-unit laundry.";
+                else if (lower.includes('1br') || lower.includes('one bedroom')) reply = "Two 1-bedroom / 1-bath units at $850/month with their own private decks.";
+                else if (lower.includes('park') || lower.includes('cole')) reply = "Cole Community Park is literally 0.1 miles away — walking distance to playgrounds, tennis, and picnics.";
+                else if (lower.includes('marina') || lower.includes('lake') || lower.includes('cumberland')) reply = "Burnside Marina and Lake Cumberland shoreline are only ~0.5 miles away. Great for boating and fishing!";
+                else if (lower.includes('price') || lower.includes('rent')) reply = "Long-term rates: $1,250 (3BR) and $850 (1BR). Short-term options available seasonally.";
+                else if (lower.includes('deck') || lower.includes('balcony')) reply = "Yes! Every single unit has its own private outdoor deck.";
+                else if (lower.includes('wifi') || lower.includes('internet')) reply = "High-speed internet is available through local providers (tenant responsible for setup).";
+                addMessage('bot', reply);
+            }, 650);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        console.log('%c🏠 Lakeview Haven Apartments – Burnside, KY • Fully updated & improved!', 'color:#10b981; font-family:monospace');
+    </script>
 </body>
 </html>
